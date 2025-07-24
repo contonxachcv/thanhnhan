@@ -114,7 +114,68 @@
         function spawnParticles(points) {
             particles = points.map(p => ({
                 x: Math.random() * canvas.width,
- 4000);
+                y: Math.random() * canvas.height,
+                tx: p.x,
+                ty: p.y,
+                vx: 0,
+                vy: 0
+            }));
+        }
+
+        function updateParticles() {
+            particles.forEach(p => {
+                let dx = p.tx - p.x;
+                let dy = p.ty - p.y;
+                p.vx += dx * 0.003;
+                p.vy += dy * 0.003;
+                p.vx *= 0.88;
+                p.vy *= 0.88;
+                p.x += p.vx;
+                p.y += p.vy;
+            });
+        }
+
+        function drawParticles() {
+            ctx.fillStyle = "rgba(255,182,193,0.9)";
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 1.8, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+        }
+
+        function nextStage() {
+            if (currentStage > 0) {
+                getTextPoints(currentStage.toString(), pts => {
+                    spawnParticles(pts);
+                    currentStage--;
+                });
+            } else if (!showFinalMessage) {
+                getTextPoints("Chúc Mừng Sinh Nhật", pts => {
+                    spawnParticles(pts);
+                    showFinalMessage = true;
+                    clearInterval(countdownInterval);
+
+                    // Chuyển sang trang mới sau 3 giây
+                    redirectTimeout = setTimeout(() => {
+                        window.location.href = "monqua.html";
+                    }, 3000);
+                });
+            }
+        }
+
+        function animate() {
+            drawMatrix();
+            if (particles.length > 0) {
+                drawParticles();
+                updateParticles();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // Start
+        nextStage();
+        countdownInterval = setInterval(nextStage, 4000);
         animate();
     </script>
 </body>
