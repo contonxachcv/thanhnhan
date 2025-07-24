@@ -114,37 +114,7 @@
         function spawnParticles(points) {
             particles = points.map(p => ({
                 x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                tx: p.x,
-                ty: p.y,
-                vx: 0,
-                vy: 0
-            }));
-        }
-
-        function updateParticles() {
-            particles.forEach(p => {
-                let dx = p.tx - p.x;
-                let dy = p.ty - p.y;
-                p.vx += dx * 0.003;
-                p.vy += dy * 0.003;
-                p.vx *= 0.88;
-                p.vy *= 0.88;
-                p.x += p.vx;
-                p.y += p.vy;
-            });
-        }
-
-        function drawParticles() {
-            ctx.fillStyle = "rgba(255,182,193,0.9)";
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 1.8, 0, 2 * Math.PI);
-                ctx.fill();
-            });
-        }
-
-        functi4000);
+ 4000);
         animate();
     </script>
 </body>
