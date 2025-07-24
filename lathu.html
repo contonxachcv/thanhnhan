@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Thư Sinh Nhật</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #ffe6f0, #fff0f5);
+            font-family: 'Be Vietnam Pro', sans-serif;
+            color: #4b2e2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .letter {
+            max-width: 500px;
+            width: 90%;
+            background: #fffafc url('https://www.transparenttextures.com/patterns/flowers.png');
+            border: 6px double #ff9dbb;
+            border-radius: 25px;
+            padding: 30px 40px;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.4);
+            position: relative;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #d6336c;
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+        
+        .line {
+            font-size: 17px;
+            margin-bottom: 14px;
+            white-space: pre-wrap;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+        }
+        
+        #surpriseBtn {
+            display: none;
+            margin: 25px auto 0;
+            padding: 12px 25px;
+            font-size: 15px;
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: block;
+        }
+        
+        #surpriseBtn:hover {
+            transform: scale(1.05);
+            background-color: #ff3385;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="letter">
+        <h1>Chúc Mừng Sinh Nhật!</h1>
+        <div id="content"></div>
+        <button id="surpriseBtn" onclick="location.href='xepanh.html'">Nhấn vào đây để nhận bất ngờ 🎁</button>
+        <div class="signature">Thân mến,<br>[Nguyên]</div>
+    </div>
+
+    <script>
+        const lines = [
+            "Thân gửi [Thanh Nhàn]",
+            "chúc chị một ngày sinh nhật thật dịu dàng, như chính anh mắt và nụ cười của chị",
+            "Chúc chị có một ngày sinh nhật vui vẻ, hạnh phúc",
+            "Không chỉ hôm nay mà là mỗi ngày",
+        ];
+
+        const container = document.getElementById("content");
+        const surpriseBtn = document.getElementById("surpriseBtn");
+
+        let lineIndex = 0;
+        let charIndex = 0;
+
+        function typeLine() {
+            if (lineIndex >= lines.length) {
+                surpriseBtn.style.display = "block";
+                return;
+            }
+
+            const line = lines[lineIndex];
+            let p = document.createElement("div");
+            p.className = "line";
+            container.appendChild(p);
+
+            function typeChar() {
+                if (charIndex < line.length) {
+                    p.textContent += line.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeChar, 30);
+                } else {
+                    charIndex = 0;
+                    lineIndex++;
+                    setTimeout(typeLine, 400);
+                }
+            }
+
+            typeChar();
+        }
+
+        typeLine();
+    </script>
+</body>
+
+</html>
