@@ -144,38 +144,7 @@
             });
         }
 
-        function nextStage() {
-            if (currentStage > 0) {
-                getTextPoints(currentStage.toString(), pts => {
-                    spawnParticles(pts);
-                    currentStage--;
-                });
-            } else if (!showFinalMessage) {
-                getTextPoints("Chúc Mừng Sinh Nhật", pts => {
-                    spawnParticles(pts);
-                    showFinalMessage = true;
-                    clearInterval(countdownInterval);
-
-                    // Chuyển sang trang mới sau 3 giây
-                    redirectTimeout = setTimeout(() => {
-                        window.location.href = "monqua.html";
-                    }, 3000);
-                });
-            }
-        }
-
-        function animate() {
-            drawMatrix();
-            if (particles.length > 0) {
-                drawParticles();
-                updateParticles();
-            }
-            requestAnimationFrame(animate);
-        }
-
-        // Start
-        nextStage();
-        countdownInterval = setInterval(nextStage, 3500);
+        functi4000);
         animate();
     </script>
 </body>
